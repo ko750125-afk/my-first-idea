@@ -1,22 +1,60 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Idea | 내 첫번째 아이디어</title>
-    <meta name="description" content="세상을 바꿀 첫 번째 아이디어를 기록하는 아름다운 공간">
+    <title>Today's Message | 오늘도 힘내세요</title>
+    <meta name="description" content="매일 힘을 주는 소중한 응원의 메시지">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;900&family=Noto+Sans+KR:wght@300;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;700&family=Noto+Sans+KR:wght@300;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="background-glow"></div>
     <main class="container">
-        <div class="content">
-            <h1 id="main-title" class="reveal-text">내 첫번째 아이디어</h1>
-            <div class="accent-line"></div>
-        </div>
+        <section class="content-card">
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                ACTIVE MESSAGE
+            </div>
+            <h1 id="main-title">오늘도 힘내세요</h1>
+            <p class="sub-text">KEEP GOING FORWARD</p>
+            <button class="next-btn btn-blue" id="next-btn">다음문장보기</button>
+        </section>
     </main>
+
+    <script>
+        const messages = [
+            "오늘도 힘내세요",
+            "오늘도 해냈어요!",
+            "조금씩 나아지고 있어요",
+            "이대로 계속 가봅시다"
+        ];
+        let currentIndex = 0;
+
+        const titleElement = document.getElementById('main-title');
+        const nextBtn = document.getElementById('next-btn');
+
+        nextBtn.addEventListener('click', () => {
+            // Cycle to the next index
+            currentIndex = (currentIndex + 1) % messages.length;
+
+            // Update button color based on index
+            const colors = ['btn-blue', 'btn-yellow', 'btn-orange', 'btn-green'];
+            colors.forEach(cls => nextBtn.classList.remove(cls));
+            nextBtn.classList.add(colors[currentIndex]);
+
+            // Apply text change with a simple animation reset
+            titleElement.style.animation = 'none';
+            titleElement.offsetHeight; // trigger reflow
+            titleElement.innerText = messages[currentIndex];
+            titleElement.style.animation = 'fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards';
+        });
+    </script>
 </body>
+
 </html>
